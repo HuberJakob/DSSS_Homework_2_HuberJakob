@@ -17,14 +17,12 @@ class TestMathGame(unittest.TestCase):
         pass
 
     def test_function_C(self):
-            test_cases = [
-                (5, 2, '+', '5 + 2', 7),
-                ''' TODO add more test cases here '''
-            ]
+        test_cases = [(5, 2, "+", "5 + 2", 7), """ TODO add more test cases here """]
 
-            for num1, num2, operator, expected_problem, expected_answer in test_cases:
-                # TODO
-                pass
+        for num1, num2, operator, expected_problem, expected_answer in test_cases:
+            # TODO
+            pass
+
 
 if __name__ == "__main__":
     unittest.main()
