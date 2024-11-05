@@ -25,7 +25,7 @@ def generate_random_integer(integerMin, integerMax):
 
 def choose_random_operator():
     """
-    Pick a random operator.
+    Pick a random operator. Excluding /
 
     Args:
         None
@@ -59,7 +59,10 @@ def generate_problem(number1, number2, operator):
     Raises:
         None
     """
-    problem = f"{number1} {operator} {number2}" #problemstring to show the user
+    if number2 <0:
+        problem = f"{number1} {operator} ({number2})"
+    else: 
+        problem = f"{number1} {operator} {number2}" #problemstring to show the user
     if operator == "+":                         #generate different solutions depending on the operator
         solution = number1 + number2
     elif operator == "-":
@@ -91,21 +94,31 @@ def math_quiz():
         "You will be presented with math problems, and you need to provide the correct answers."
     )
 
-    for i in range(numberOfQuestions):              #generate new problem for picked number of Questions
+    for _ in range(numberOfQuestions):              #generate new problem for picked number of Questions
         number1 = generate_random_integer(1, 10)
-        number2 = generate_random_integer(1, 5.5)
+        number2 = generate_random_integer(1, 5)
         operator = choose_random_operator()
 
         problem, answer = generate_problem(number1, number2, operator)
         print(f"\nQuestion: {problem}")
-        userAnswer = int(input("Your answer: "))
-
+        while True:     #get correct userinput
+            userAnswer = input("Your answer (n for next question): ")    #user input
+            if userAnswer == 'n':
+                print("skip")
+                break
+                
+            try:
+                userAnswer = int(userAnswer)
+            except ValueError:
+                print("Only use integer numbers!")
+            else:
+                break
         if userAnswer == answer:                    #Check User's answer
             print("Correct! You earned a point.")
             score += 1                              #Update score
         else:
             print(f"Wrong answer. The correct answer is {answer}.")
-
+        
     print(f"\nGame over! Your score is: {score}/{numberOfQuestions}")   #Show results
 
 
